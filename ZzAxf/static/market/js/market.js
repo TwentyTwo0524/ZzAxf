@@ -38,8 +38,8 @@ $(function () {
         // localStorage.setItem('index', $(this).index())
         $.cookie('index', $(this).index(), {expires: 3, path: '/'})
     })
-    
-    
+
+
     // 子类
     var categoryShow = false
     $('#category-bt').click(function () {
@@ -71,7 +71,7 @@ $(function () {
         $('.category-view').hide()
         $('#category-bt i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up')
     }
-    
+
     // 排序
     var sortShow = false
     $('#sort-bt').click(function () {
@@ -93,7 +93,7 @@ $(function () {
         $('.sort-view').hide()
         $('#sort-bt i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up')
     }
-    
+
     // 灰色蒙层
     $('.bounce-view').click(function () {
         sortViewHide()

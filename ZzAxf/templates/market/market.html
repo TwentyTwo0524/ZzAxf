@@ -14,7 +14,7 @@
 
 {% block content %}
     <div class="market">
-{#       分类#}
+
         <div class="type-slider">
             <ul>
                 {% for foodtype in foodtypes %}
@@ -30,7 +30,7 @@
             </ul>
         </div>
 
-{#      导航#}
+
         <nav>
             <ul>
                 <li id="category-bt">
@@ -48,7 +48,7 @@
             </ul>
         </nav>
 
-{#      主体内容#}
+
         <div class="main-content">
             <div class="content-wrapper">
                 <ul>
@@ -84,18 +84,18 @@
             <div class="bounce-view category-view">
                 <div class="bounce-wrapper">
                     {% for childtype in childtype_list %}
-                        <a href="{% url 'axf:market' childtype.id 0 %}">{{ childtype.name }}</a>
+                        <a href="{% url 'app:market' childtype.id 0 %}">{{ childtype.name }}</a>
                     {% endfor %}
                 </div>
             </div>
-{#            <div class="bounce-view sort-view">#}
-{#                <div class="bounce-wrapper">#}
-{#                    <a href="{% url 'app:market' childid 0 %}">综合排序</a>#}
-{#                    <a href="{% url 'app:market' childid 1 %}">销量排序</a>#}
-{#                    <a href="{% url 'app:market' childid 2 %}">价格最低</a>#}
-{#                    <a href="{% url 'app:market' childid 3 %}">价格最高</a>#}
-{#                </div>#}
-{#            </div>#}
+            <div class="bounce-view sort-view">
+                <div class="bounce-wrapper">
+                    <a href="{% url 'app:market' childid 0 %}">综合排序</a>
+                    <a href="{% url 'app:market' childid 1 %}">销量排序</a>
+                    <a href="{% url 'app:market' childid 2 %}">价格最低</a>
+                    <a href="{% url 'app:market' childid 3 %}">价格最高</a>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
