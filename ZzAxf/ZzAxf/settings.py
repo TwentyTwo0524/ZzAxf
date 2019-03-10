@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'ZzAxf.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'python1812axf',
+        'NAME': 'python1812axf_zz',
         'USER':'root',
         'PASSWORD':'rock1204',
     }

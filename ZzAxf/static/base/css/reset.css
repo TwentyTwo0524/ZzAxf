@@ -6,8 +6,8 @@ body{font:18px/1.5 'Microsoft Yahei','Simsun';  color:#353d44;background:#efefef
 h1,h2,h3,h4,h5,h6{font-size:100%}
 ul,menu{list-style:none}
 a{text-decoration:none;color:#1a1a1a}
-a:hover, a:active, a:focus{color:#1c5aa2;text-decoration: none;}
-a:active{color:#aaa;}
+/*a:hover, a:active, a:focus{color:#1c5aa2;text-decoration: none;}*/
+/*a:active{color:#aaa;}*/
 img{vertical-align:middle;border:0;-ms-interpolation-mode:bicubic;}
 button,input,select,textarea{font-size:100%; vertical-align:middle;outline:none;}
 textarea{resize:none}

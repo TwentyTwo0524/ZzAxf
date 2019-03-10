@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,52 +7,53 @@
         {% block title %}
         {% endblock %}
     </title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <link rel="stylesheet" href="{% static 'base/css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'base/css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
-    {% block estcss %}
+    {% block extcss %}
     {% endblock %}
 
 </head>
 <body>
 
 {% block body %}
-    {# 导航 #}
+    {# 导航#}
     {% block header %}
         <header>爱鲜蜂</header>
     {% endblock %}
-    {# 主体部分 #}
+
+    {# 主体内容#}
     <div class="hidescroll">
         <div id="content">
             {% block content %}
-                <p>主体部分</p>
+
             {% endblock %}
         </div>
     </div>
+
     {# 底部#}
     {% block footer %}
         <footer>
-            <a href="#" class="home">
+            <a href="{% url 'app:home' %}" class="home">
                 <div class="item">
                     <div class="img"><span></span></div>
                     <div class="name">首页</div>
                 </div>
             </a>
-            <a href="#" class="market">
+            <a href="{% url 'app:marketbase' %}" class="market">
                 <div class="item">
                     <div class="img"><span></span></div>
                     <div class="name">闪购超市</div>
                 </div>
             </a>
-            <a href="#" class="cart">
+            <a href="{% url 'app:cart' %}" class="cart">
                 <div class="item">
                     <div class="img"><span></span></div>
                     <div class="name">购物车</div>
                 </div>
             </a>
-            <a href="#" class="mine">
+            <a href="{% url 'app:mine' %}" class="mine">
                 <div class="item">
                     <div class="img"><span></span></div>
                     <div class="name">我的</div>
@@ -67,5 +67,6 @@
 <script src="{% static 'base/js/base.js' %}"></script>
 {% block extjs %}
 {% endblock %}
+
 </body>
 </html>
