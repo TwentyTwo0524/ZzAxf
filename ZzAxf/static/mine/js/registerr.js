@@ -1,3 +1,5 @@
 $(function () {
     $('.register').width(innerWidth)
+
 })
+

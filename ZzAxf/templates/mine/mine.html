@@ -21,7 +21,7 @@
             <div class="user-content">
                 <p>
                     <span class="glyphicon glyphicon-user"></span>
-                    <a href="{% url 'app:login' %}">
+                    <a href="{% url 'axf:login' %}">
                         {{ user.name | default:'未登录' }}
                     </a>
                 </p>
@@ -29,7 +29,7 @@
                     <span class="glyphicon glyphicon-th-list"></span>
                     等级: {{ user.rank | default:'无' }}
                 </p>
-                <a href="#" class="register">注册</a>
+                <a href="{% url 'axf:register' %}" class="register">注册</a>
             </div>
         </div>
 
@@ -120,7 +120,7 @@
 
             {% if user %}
                 <section class="quit">
-                    <a href="{% url 'app:logout' %}">
+                    <a href="{% url 'axf:logout' %}">
                         退出
                     </a>
             </section>

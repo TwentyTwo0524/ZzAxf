@@ -1,6 +1,15 @@
+import hashlib
+import random
+import time
+
+from django.core.cache import cache
 from django.shortcuts import render, redirect
-from app.models import Wheel,Nav,Mustbuy,Shop,Mainshow,Foodtype,Goods
-# Create your views here.
+
+
+from app.models import Wheel,Nav,Mustbuy,Shop,Mainshow,Foodtype,Goods,User
+
+
+
 def home(request):
     wheels = Wheel.objects.all()
 
@@ -27,7 +36,6 @@ def home(request):
     }
 
     return render(request, 'home/home.html', context=response_dir)
-
 
 def market(request, childid='0', sortid='0'):
     foodtypes = Foodtype.objects.all()
@@ -70,20 +78,84 @@ def market(request, childid='0', sortid='0'):
     }
     return render(request, 'market/market.html', context=response_dir)
 
-
 def cart(request):
-    return render(request,'cart/cart.html')
-
+    temp = random.randrange(4,63)
+    return render(request, 'cart/cart.html', context={'temp':temp})
 
 def mine(request):
-    return render(request,'mine/mine.html')
+    token = request.session.get('token')
+    userid = cache.get(token)
+    user = None
+    if userid:
+        user = User.objects.get(pk=userid)
+
+    return render(request, 'mine/mine.html', context={'user':user})
 
 def login(request):
-    return render(request, 'mine/login.html')
+    if request.method == 'GET':
+        return render(request, 'mine/login.html')
+    elif request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
+        
+
+        users = User.objects.filter(email=email)
+        if users.exists():  # 存在
+            user = users.first()
+            if user.password == generate_password(password):    # 验证通过
+                # 更新token
+                token = generate_token()
+
+                # 状态保持
+                cache.set(token, user.id, 60*60*24*3)
+
+                # 传递客户端
+                request.session['token'] = token
+
+                return redirect('axf:mine')
+            else:   # 密码错误
+                return render(request, 'mine/login.html', context={'ps_err': '密码错误'})
+        else:   # 不存在
+            return render(request, 'mine/login.html', context={'user_err':'用户不存在'})
 
 def logout(request):
     request.session.flush()
 
     return redirect('axf:mine')
 
+def generate_password(param):
+    md5 = hashlib.md5()
+    md5.update(param.encode('utf-8'))
+    return md5.hexdigest()
+
+def generate_token():
+    temp = str(time.time()) + str(random.random())
+    md5 = hashlib.md5()
+    md5.update(temp.encode('utf-8'))
+    return md5.hexdigest()
+
+def register(request):
+    if request.method == 'GET':
+        return render(request, 'mine/register.html')
+    elif request.method == 'POST':
+        # 获取数据
+        email = request.POST.get('email')
+        name = request.POST.get('name')
+        passoword = generate_password(request.POST.get('password'))
+
+        # 存入数据库
+        user = User()
+        user.email = email
+        user.password = passoword
+        user.name = name
+        user.save()
+
+        # 状态保持
+        token = generate_token()
+        # key-value  >>  token:userid
+        cache.set(token, user.id, 60*60*24*3)
+
+        request.session['token'] = token
+
+        return redirect('axf:mine')
