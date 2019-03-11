@@ -93,3 +93,6 @@ class Goods(models.Model):
 
     class Meta:
         db_table = 'axf_goods'
+
+
+

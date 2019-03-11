@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from app.models import Wheel,Nav,Mustbuy,Shop,Mainshow,Foodtype,Goods
 # Create your views here.
 def home(request):
@@ -77,3 +77,13 @@ def cart(request):
 
 def mine(request):
     return render(request,'mine/mine.html')
+
+def login(request):
+    return render(request, 'mine/login.html')
+
+
+def logout(request):
+    request.session.flush()
+
+    return redirect('axf:mine')
+
